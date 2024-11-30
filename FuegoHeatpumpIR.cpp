@@ -98,7 +98,8 @@ void FuegoHeatpumpIR::send(IRSender& IR, uint8_t powerModeCmd, uint8_t operating
 
 void FuegoHeatpumpIR::sendFuego(IRSender& IR, uint8_t powerMode, uint8_t operatingMode, uint8_t fanSpeed, uint8_t temperature, uint8_t swingV, uint8_t swingH)
 {
-  uint8_t FuegoTemplate[] = { 0x23, 0xCB, 0x26, 0x01, 0x80, 0x20, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00 };
+  //uint8_t FuegoTemplate[] = { 0x23, 0xCB, 0x26, 0x01, 0x80, 0x20, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00 };
+  uint8_t FuegoTemplate[] = { 0x23, 0xCB, 0x26, 0x01, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
   //                             0     1     2     3     4     5     6     7     8     9    10    11    12    13
 
   uint8_t checksum = 0x00;
@@ -122,7 +123,7 @@ void FuegoHeatpumpIR::sendFuego(IRSender& IR, uint8_t powerMode, uint8_t operati
   FuegoTemplate[13] = checksum;
 
   // 38 kHz PWM frequency
-  IR.setFrequency(38);
+  IR.setFrequency(40); // 40 is 38 kHz
 
   // Header
   IR.mark(FUEGO_AIRCON1_HDR_MARK);
